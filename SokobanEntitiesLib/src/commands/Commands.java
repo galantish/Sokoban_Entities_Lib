@@ -6,5 +6,6 @@ public enum Commands
 	ADD_RECORD, 
 	ADD_LEVEL, 
 	DB_QUERY, 
-	GET_SOLUTION;
+	GET_SOLUTION,
+	GET_CLUE;
 }

@@ -30,6 +30,7 @@ public class Level implements Serializable
 	@Transient private iUnmoveable[][] board;
 	@Transient private int row;
 	@Transient private int col;
+	@Transient private char[][] startBoard;
 	
 	@Id
 	@Column(name="LevelID")
@@ -53,6 +54,7 @@ public class Level implements Serializable
 		this.itemsOnBoard = new iMoveable[this.row][this.col];		
 		this.board = new iUnmoveable[this.row][this.col];
 		this.levelID = null;
+		this.startBoard = new char[this.row][this.col];
 	}
 	
 	/**
@@ -78,6 +80,8 @@ public class Level implements Serializable
 		for(int i = 0; i < this.row; i++)
 			for(int j = 0; j < this.col; j++)
 				this.board[i][j] = new Floor();
+		
+		this.startBoard = new char[this.row][this.col];
 	}
 	
 	public Level(int row, int col, String levelID)
@@ -96,6 +100,8 @@ public class Level implements Serializable
 		for(int i = 0; i < this.row; i++)
 			for(int j = 0; j < this.col; j++)
 				this.board[i][j] = new Floor();
+		
+		this.startBoard = new char[this.row][this.col];
 	}
 	
 	public Level(String levelID)
@@ -109,6 +115,7 @@ public class Level implements Serializable
 		this.itemsOnBoard = new iMoveable[this.row][this.col];		
 		this.board = new iUnmoveable[this.row][this.col];
 		this.levelID = levelID;
+		this.startBoard = new char[this.row][this.col];
 	}
 	
 	/**
@@ -127,6 +134,7 @@ public class Level implements Serializable
 		this.targets = level.targets;
 		this.playersSteps = level.playersSteps;
 		this.levelID = level.levelID;
+		this.startBoard = new char[this.row][this.col];
 	}
 
 	public List<User> getUsers() 
@@ -511,5 +519,29 @@ public class Level implements Serializable
 		return "Level [playersSteps=" + playersSteps + ", players=" + players + ", boxes=" + boxes + ", targets="
 				+ targets + ", itemsOnBoard=" + Arrays.toString(itemsOnBoard) + ", board=" + Arrays.toString(board)
 				+ ", row=" + row + ", col=" + col + ", levelID=" + levelID + ", users=" + users + "]";
+	}
+	
+	public char[][] copyBoard(char[][] board)
+	{
+		int row = board.length;
+		int col = board[0].length;
+		
+		char[][] newBoard = new char[row][col];
+		
+		for(int i=0; i<row;i++)
+			for(int j=0; j<col;j++)
+				newBoard[i][j] = board[i][j];
+		
+		return newBoard;
+	}
+
+	public char[][] getStartBoard() 
+	{
+		return startBoard;
+	}
+
+	public void setStartBoard(char[][] startBoard) 
+	{
+		this.startBoard = startBoard;
 	}
 }

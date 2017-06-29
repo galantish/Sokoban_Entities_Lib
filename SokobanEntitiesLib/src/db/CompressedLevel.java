@@ -98,6 +98,8 @@ public class CompressedLevel implements Serializable
 			}
 		}	
 		
+		level.setStartBoard(level.getLevelBoard());
+
 		return level;
 	}
 	
